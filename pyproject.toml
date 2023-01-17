@@ -30,6 +30,7 @@ app = "app.script.start_app:main"
 lint = "app.script.lint_code:main"
 format = "app.script.format_code:main"
 migrate = "app.script.migration:main"
+preset = "app.script.setup_preset:main"
 
 [tool.black]
 line-length = 88
