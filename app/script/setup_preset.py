@@ -32,7 +32,6 @@ preset = [
 async def create() -> None:
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
-        await conn.execute(text("DROP TABLE IF EXISTS alembic_version;"))
         await conn.run_sync(Base.metadata.create_all)
 
     async with httpx.AsyncClient(http1=True) as client:
