@@ -42,13 +42,3 @@ class ValidationError(CustomHTTPException):
 class ServiceUnavailable(CustomHTTPException):
     def __init__(self, msg: str = "Сервис временно недоступен.", **kwargs: Any) -> None:
         super(ServiceUnavailable, self).__init__(code=503, msg=msg, **kwargs)
-
-
-__all__ = [
-    "Forbidden",
-    "Unauthorized",
-    "NotFound",
-    "LogicError",
-    "ValidationError",
-    "ServiceUnavailable",
-]

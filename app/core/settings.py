@@ -1,32 +1,32 @@
 from functools import lru_cache
 
 from dotenv import find_dotenv
-from pydantic import BaseSettings, MongoDsn, validator
+from pydantic import BaseSettings, PostgresDsn, validator
 
 
 class __DBSettings(BaseSettings):
     """DB connection settings"""
 
-    MONGO_USER: str
-    MONGO_PASSWORD: str
-    MONGO_HOST: str
-    MONGO_PORT: str
-    MONGO_DB: str
-    MONGO_URI: MongoDsn | None = None
+    POSTGRES_USER: str
+    POSTGRES_PASSWORD: str
+    POSTGRES_HOST: str
+    POSTGRES_PORT: str
+    POSTGRES_DB: str
+    SQLALCHEMY_DATABASE_URI: PostgresDsn | None = None
 
-    @validator("MONGO_URI")
+    @validator("SQLALCHEMY_DATABASE_URI")
     def assemble_db_con(cls, current_value: str | None, values: dict[str, str]) -> str:
         return (
             current_value
             if current_value
             else str(
-                MongoDsn.build(
-                    scheme="mongodb",
-                    user=values.get("MONGO_USER"),
-                    password=values.get("MONGO_PASSWORD"),
-                    host=values.get("MONGO_HOST"),
-                    port=values.get("MONGO_PORT"),
-                    path=values.get("MONGO_DB"),
+                PostgresDsn.build(
+                    scheme="postgresql+asyncpg",
+                    user=values.get("POSTGRES_USER"),
+                    password=values.get("POSTGRES_PASSWORD"),
+                    host=values.get("POSTGRES_HOST"),
+                    port=values.get("POSTGRES_PORT"),
+                    path="/" + values.get("POSTGRES_DB", ""),
                 )
             )
         )
@@ -39,7 +39,7 @@ class Settings(__DBSettings):
     DESCRIPTION: str = "Test task for Interview"
     VERSION: str = "0.1.0"
     DEBUG: bool
-    API_PREFIX: str = "api/v1"
+    API_PREFIX: str = "/api/v1"
 
     HOST: str = "0.0.0.0"
     PORT: int = 5000
