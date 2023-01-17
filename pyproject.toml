@@ -16,6 +16,11 @@ black = "^22.12.0"
 isort = "^5.11.4"
 autoflake = "^2.0.0"
 
+[tool.poetry.scripts]
+app = "app.script.start_app:main"
+lint = "app.script.lint_code:main"
+format = "app.script.format_code:main"
+
 [tool.black]
 line-length = 88
 target-version = ['py310']
