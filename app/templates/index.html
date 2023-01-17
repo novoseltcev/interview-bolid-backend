@@ -8,12 +8,12 @@
     <h1>Events</h1>
     <ul>
         {% for event in events %}
-            <li>
-                <p>{{ event.num }}</p>
-                <p>{{ event.sensorType}}</p>
-                <p>{{ event.name}}</p>
-                <p>{{ event.temperature}}</p>
-                <p>{{ event.humanity}}</p>
+            <li style="display: flex; flex-direction: row; gap: 15px; margin: 15px; justify-content: center">
+                <p>Num: {{ event.id }}</p>
+                <p>Sensor_type: {{ event.sensor_type}}</p>
+                <p>Name: {{ event.name}}</p>
+                <p>Temperature: {{ event.temperature}}</p>
+                <p>Humidity: {{ event.humidity}}</p>
             </li>
         {% endfor %}
     </ul>

@@ -39,7 +39,7 @@ class Settings(__DBSettings):
     DESCRIPTION: str = "Test task for Interview"
     VERSION: str = "0.1.0"
     DEBUG: bool
-    API_PREFIX: str = "/api/v1"
+    API_PREFIX: str = "/api"
 
     HOST: str = "0.0.0.0"
     PORT: int = 5000

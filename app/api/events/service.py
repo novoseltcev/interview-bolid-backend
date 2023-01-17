@@ -4,6 +4,7 @@ from fastapi import Depends
 
 from app.api.base_schemas import PageMeta
 from app.api.events.repository import Event, EventRepository
+from app.api.events.schemas import EventSchema
 from app.db.session import AsyncSession, get_session
 
 
@@ -29,3 +30,8 @@ class EventService:
             )
             await self.repository.commit()
             return data, PageMeta(page=page, per_page=per_page, total=total)
+
+    async def create(self, data: EventSchema) -> None:
+        async with self.repository:
+            await self.repository.insert(Event(**data.dict()))
+            await self.repository.commit()

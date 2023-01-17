@@ -1,11 +1,13 @@
 from typing import Optional
 
-from app.api.base_schemas import BaseModel
+from pydantic import Field
+
+from app.api.base_schemas import BaseSchema
 
 
-class EventSchema(BaseModel):
-    sensor_type: int
-    num: int
+class EventSchema(BaseSchema):
+    sensor_type: int = Field(alias="Sensor_type")
+    id: int = Field(alias="num")
     name: Optional[str]
     temperature: Optional[float]
     humidity: Optional[float]

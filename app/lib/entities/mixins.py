@@ -1,28 +1,24 @@
-from uuid import UUID as UUID4
-from uuid import uuid4
-
-from sqlalchemy import Column, text
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Column, Integer, text
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
 
-class UUIDMixin(Base):
-    """Single PK as uuid"""
+class IDMixin(Base):
+    """Single PK as id"""
 
     __abstract__ = True
 
-    uuid: UUID4 = Column(
-        UUID(as_uuid=True),
-        default=uuid4,
-        server_default=text("gen_random_uuid()"),
+    id = Column(
+        Integer,
         primary_key=True,
+        server_default=text('1'),
+        nullable=False,
         index=True,
     )
 
 
-class BaseModelMixin(UUIDMixin):
+class BaseModelMixin(IDMixin):
     """Combining model system info"""
 
     __abstract__ = True

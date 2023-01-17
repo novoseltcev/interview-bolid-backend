@@ -29,16 +29,16 @@ class ModelRepository(Repository[ModelT], Generic[ModelT]):
             page_length=page_length,
         )
 
-    async def select_by_uuid(self, uuid: UUID) -> ModelT | None:
-        return await self.session.get(entity=self.model, ident=uuid)  # type: ignore
+    async def select_by_uuid(self, id: int) -> ModelT | None:
+        return await self.session.get(entity=self.model, ident=id)  # type: ignore
 
     async def delete(self, uuid: UUID) -> None:
-        await self.session.execute(delete(self.model).where(self.model.uuid == uuid))
+        await self.session.execute(delete(self.model).where(self.model.id == id))
 
     async def update(self, entity: ModelT) -> ModelT | None:
         await self.session.execute(
             update(self.model)
-            .where(self.model.uuid == entity.uuid)
+            .where(self.model.uuid == entity.id)
             .values(**self._to_dict(entity))
         )
-        return await self.select_by_uuid(entity.uuid)
+        return await self.select_by_uuid(entity.id)

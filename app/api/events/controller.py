@@ -16,4 +16,13 @@ async def get_events(
     data, meta = await service.get_all(
         page=pagination.page, per_page=pagination.per_page
     )
-    return ResponseList[EventSchema](data=data, meta=meta)
+    return ResponseList[EventSchema](data=[
+        EventSchema.from_orm(event) for event in data
+    ], meta=meta)
+
+
+@router.post("/")
+async def create_event(
+    data: EventSchema, service: EventService = Depends()
+):
+    await service.create(data)
