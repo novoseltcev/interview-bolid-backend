@@ -1,0 +1,6 @@
+docker-compose.yml
+README.md
+.git
+.gitignore
+.env.example
+.mypy_cache
