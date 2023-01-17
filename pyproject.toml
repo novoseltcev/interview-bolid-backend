@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.10"
 python-dotenv = "^0.21.0"
 pydantic = "^1.10.4"
+uvicorn = "^0.20.0"
 
 
 [tool.poetry.group.dev.dependencies]
