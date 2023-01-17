@@ -4,7 +4,7 @@ from collections.abc import Iterable
 from typing import Generic, Type, TypeVar
 from uuid import UUID
 
-from sqlalchemy import select, update, delete
+from sqlalchemy import delete, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.lib.entities.mixins import BaseModelMixin
@@ -33,9 +33,7 @@ class ModelRepository(Repository[ModelT], Generic[ModelT]):
         return await self.session.get(entity=self.model, ident=uuid)  # type: ignore
 
     async def delete(self, uuid: UUID) -> None:
-        await self.session.execute(
-            delete(self.model).where(self.model.uuid == uuid)
-        )
+        await self.session.execute(delete(self.model).where(self.model.uuid == uuid))
 
     async def update(self, entity: ModelT) -> ModelT | None:
         await self.session.execute(
