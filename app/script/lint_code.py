@@ -14,7 +14,9 @@ def main() -> None:
         $ lint
     """
 
-    modules = ["app", ]
+    modules = [
+        "app",
+    ]
 
     print("\nFlake8:")
     flake8.main([*modules])

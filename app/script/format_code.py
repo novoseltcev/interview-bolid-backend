@@ -19,7 +19,9 @@ def main() -> None:
         You have to write type annotations:^)
     """
 
-    modules = ["app", ]
+    modules = [
+        "app",
+    ]
 
     isort.main([*modules, "--force-single-line-imports"])
     subprocess.run(
